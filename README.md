@@ -178,6 +178,8 @@ Via the easy-to-use, efficient, flexible and scalable implementation, our vision
   - 🧩  *Cascaded models application*: as an extension of the typical traditional audio tasks, we combine the workflows of the aforementioned tasks with other fields like Natural language processing (NLP) and Computer Vision (CV).
 
 ### Recent Update
+- ⚡ 2023.04.28: Fix [0-d tensor](https://github.com/PaddlePaddle/PaddleSpeech/pull/3214), with the upgrade of paddlepaddle==2.5, the problem of modifying 0-d tensor has been solved.
+- 👑 2023.04.25: Add [AMP for U2 conformer](https://github.com/PaddlePaddle/PaddleSpeech/pull/3167).
 - 🔥 2023.04.06: Add [subtitle file (.srt format) generation example](./demos/streaming_asr_server).
 - 👑 2023.04.25: Add [AMP for U2 conformer](https://github.com/PaddlePaddle/PaddleSpeech/pull/3167).
 - 🔥 2023.03.14: Add SVS(Singing Voice Synthesis) examples with Opencpop dataset, including [DiffSinger](./examples/opencpop/svs1)、[PWGAN](./examples/opencpop/voc1) and [HiFiGAN](./examples/opencpop/voc5), the effect is continuously optimized.
