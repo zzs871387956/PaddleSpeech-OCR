@@ -105,4 +105,3 @@ wget -c https://paddlespeech.bj.bcebos.com/PaddleAudio/zh.wav
   [2022-05-15 15:08:19,026] [    INFO] - acs http client finished
   {'transcription': '我认为跑步最重要的就是给我带来了身体健康', 'acs': [{'w': '我', 'bg': 0, 'ed': 1.6800000000000002}, {'w': '我', 'bg': 2.1, 'ed': 4.28}, {'w': '康', 'bg': 3.2, 'ed': 4.92}]}
   ```
-
