@@ -29,11 +29,40 @@ pip install -r requriement.txt
 ```bash
 wget -c https://paddlespeech.bj.bcebos.com/PaddleAudio/zh.wav
 ```
-### 3. 使用方法
+### 3. 服务端使用方法
+- 命令行 (推荐使用)
+  **注意:** 默认部署在 `cpu` 设备上，可以通过修改服务配置文件中 `device` 参数部署在 `gpu` 上。
+  ```bash
+  # 在 PaddleSpeech/demos/audio_content_search 目录启动服务
+  paddlespeech_server start --config_file ./conf/ws_conformer_application.yaml
+  ```
+  
+  使用方法：
+
+  ```bash
+  paddlespeech_server start --help
+  ```
+  参数:
+  - `config_file`: 服务的配置文件，默认： `./conf/application.yaml`
+  - `log_file`: log 文件. 默认：`./log/paddlespeech.log`
+  
+   输出:
+  ```text
+  [2024-05-14 08: 51: 04,823] [    INFO] - start to init the engine
+  [2024-05-14 08: 51: 04,824] [    INFO] - acs : python engine.
+  [2024-05-14 08: 51: 04,831] [    INFO] - word list: ['我'， '康']
+  [2024-05-14 08: 51: 04,831] [    INFO] - Initialize acs server engine successfully on device: cpu.
+  INFO:     Started server process [21242]
+  INFO:     Waiting for application startup.
+  INFO:     Application startup complete.
+  INFO:     Uvicorn running on http: /0.0.0.0:8490 (Press CTRL+C to quit)
+    ```
+
+### 4.客户端使用方法
 - 命令行 (推荐使用)
   ```bash
   # 中文
-  paddlespeech_client acs --server_ip 127.0.0.1 --port 8090 --input ./zh.wav 
+  paddlespeech_client acs --server_ip 127.0.0.1 --port 8490 --input ./zh.wav 
   ```
   
   使用方法：
@@ -76,3 +105,4 @@ wget -c https://paddlespeech.bj.bcebos.com/PaddleAudio/zh.wav
   [2022-05-15 15:08:19,026] [    INFO] - acs http client finished
   {'transcription': '我认为跑步最重要的就是给我带来了身体健康', 'acs': [{'w': '我', 'bg': 0, 'ed': 1.6800000000000002}, {'w': '我', 'bg': 2.1, 'ed': 4.28}, {'w': '康', 'bg': 3.2, 'ed': 4.92}]}
   ```
+

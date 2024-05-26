@@ -30,11 +30,42 @@ Here are sample files for this demo that can be downloaded:
 wget -c https://paddlespeech.bj.bcebos.com/PaddleAudio/zh.wav
 ```
 
-### 3. Usage
+### 3. Server Usage 
+
+- Command Line (Recommended)
+  **Note:** The default deployment of the server is on the 'CPU' device, which can be deployed on the 'GPU' by modifying the 'device' parameter in the service configuration file.
+  ```bash
+  # in PaddleSpeech/demos/audio_content_search start the service
+   paddlespeech_server start --config_file ./conf/ws_conformer_wenetspeech_application.yaml
+  ```
+  
+  Usage:
+
+  ```bash
+  paddlespeech_server start --help
+  ```
+  Arguments:
+  - `config_file`: yaml file of the app, defalut: `./conf/application.yaml`
+  - `log_file`: log file. Default: `./log/paddlespeech.log`
+  
+  Output:
+  ```bash
+  [2024-05-14 08: 51: 04,823] [    INFO] - start to init the engine
+  [2024-05-14 08: 51: 04,824] [    INFO] - acs : python engine.
+  [2024-05-14 08: 51: 04,831] [    INFO] - word list: ['我'， '康']
+  [2024-05-14 08: 51: 04,831] [    INFO] - Initialize acs server engine successfully on device: cpu.
+  INFO:     Started server process [21242]
+  INFO:     Waiting for application startup.
+  INFO:     Application startup complete.
+  INFO:     Uvicorn running on http: /0.0.0.0:8490 (Press CTRL+C to quit)
+  ```
+
+### 4. Client Usage
+
 - Command Line(Recommended)
   ```bash
   # Chinese
-  paddlespeech_client acs --server_ip 127.0.0.1 --port 8090 --input ./zh.wav 
+  paddlespeech_client acs --server_ip 127.0.0.1 --port 8490 --input ./zh.wav 
   ```
   
   Usage:
