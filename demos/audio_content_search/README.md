@@ -36,7 +36,7 @@ wget -c https://paddlespeech.bj.bcebos.com/PaddleAudio/zh.wav
   **Note:** The default deployment of the server is on the 'CPU' device, which can be deployed on the 'GPU' by modifying the 'device' parameter in the service configuration file.
   ```bash
   # in PaddleSpeech/demos/audio_content_search start the service
-   paddlespeech_server start --config_file ./conf/ws_conformer_wenetspeech_application.yaml
+   paddlespeech_server start --config_file ./conf/acs_application.yaml
   ```
   
   Usage:
