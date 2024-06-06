@@ -10,11 +10,12 @@ paddlespeech cls --input ./cat.wav --topk 10
 paddlespeech text --input 今天的天气真不错啊你下午有空吗我想约你一起去吃饭 --model ernie_linear_p3_wudao_fast
 
 # Speech SSL
+wget -c https://paddlespeech.bj.bcebos.com/PaddleAudio/en.wav
 paddlespeech ssl --task asr --lang en --input ./en.wav
 paddlespeech ssl --task vector --lang en --input ./en.wav
 
 # Speech_recognition
-wget -c https://paddlespeech.bj.bcebos.com/PaddleAudio/zh.wav https://paddlespeech.bj.bcebos.com/PaddleAudio/en.wav https://paddlespeech.bj.bcebos.com/PaddleAudio/ch_zh_mix.wav
+wget -c https://paddlespeech.bj.bcebos.com/PaddleAudio/zh.wav https://paddlespeech.bj.bcebos.com/PaddleAudio/ch_zh_mix.wav
 paddlespeech asr --input ./zh.wav
 paddlespeech asr --model conformer_aishell --input ./zh.wav
 paddlespeech asr --model conformer_online_aishell --input ./zh.wav
