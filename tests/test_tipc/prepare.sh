@@ -35,6 +35,7 @@ if [[ ${MODE} = "benchmark_train" ]];then
     pip install setuptools_scm #-i https://pypi.tuna.tsinghua.edu.cn/simple 
     pip install . #-i https://pypi.tuna.tsinghua.edu.cn/simple 
     pip install jsonlines
+    pip install scipy==1.12.0
     pip list
     cd -
     if [[ ${model_name} == "conformer" ]]; then
