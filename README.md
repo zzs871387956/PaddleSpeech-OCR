@@ -178,6 +178,13 @@ Via the easy-to-use, efficient, flexible and scalable implementation, our vision
   - 🧩  *Cascaded models application*: as an extension of the typical traditional audio tasks, we combine the workflows of the aforementioned tasks with other fields like Natural language processing (NLP) and Computer Vision (CV).
 
 ### Recent Update
+- 👑 2023.05.31: Add [WavLM ASR-en](https://github.com/PaddlePaddle/PaddleSpeech/blob/develop/examples/librispeech/asr5), WavLM fine-tuning for ASR on LibriSpeech.
+- 👑 2023.05.04: Add [HuBERT ASR-en](https://github.com/PaddlePaddle/PaddleSpeech/blob/develop/examples/librispeech/asr4), HuBERT fine-tuning for ASR on LibriSpeech.
+- ⚡ 2023.04.28: Fix [0-d tensor](https://github.com/PaddlePaddle/PaddleSpeech/pull/3214), with the upgrade of paddlepaddle==2.5, the problem of modifying 0-d tensor has been solved.
+- 👑 2023.04.25: Add [AMP for U2 conformer](https://github.com/PaddlePaddle/PaddleSpeech/pull/3167).
+- 🔥 2023.04.06: Add [subtitle file (.srt format) generation example](./demos/streaming_asr_server).
+- 👑 2023.04.25: Add [AMP for U2 conformer](https://github.com/PaddlePaddle/PaddleSpeech/pull/3167).
+- 🔥 2023.03.14: Add SVS(Singing Voice Synthesis) examples with Opencpop dataset, including [DiffSinger](./examples/opencpop/svs1)、[PWGAN](./examples/opencpop/voc1) and [HiFiGAN](./examples/opencpop/voc5), the effect is continuously optimized.
 - 👑 2023.03.09: Add [Wav2vec2ASR-zh](./examples/aishell/asr3).
 - 🎉 2023.03.07: Add [TTS ARM Linux C++ Demo](./demos/TTSArmLinux).
 - 🔥 2023.03.03 Add Voice Conversion [StarGANv2-VC synthesize pipeline](./examples/vctk/vc3).
@@ -221,13 +228,13 @@ Via the easy-to-use, efficient, flexible and scalable implementation, our vision
 
 ## Installation
 
-We strongly recommend our users to install PaddleSpeech in **Linux** with *python>=3.7* and *paddlepaddle>=2.4.1*.
+We strongly recommend our users to install PaddleSpeech in **Linux** with *python>=3.8* and *paddlepaddle<=2.5.1*. Some new versions of Paddle do not have support for adaptation in PaddleSpeech, so currently only versions 2.5.1 and earlier can be supported.
 
 ### **Dependency Introduction**
 
 + gcc >= 4.8.5
-+ paddlepaddle >= 2.4.1
-+ python >= 3.7
++ paddlepaddle <= 2.5.1
++ python >= 3.8
 + OS support:  Linux(recommend), Windows, Mac OSX
 
 PaddleSpeech depends on paddlepaddle. For installation, please refer to the official website of [paddlepaddle](https://www.paddlepaddle.org.cn/en) and choose according to your own machine. Here is an example of the cpu version.
@@ -577,14 +584,14 @@ PaddleSpeech supports a series of most popular models. They are summarized in [r
   </thead>
   <tbody>
     <tr>
-    <td> Text Frontend </td>
-    <td colspan="2"> &emsp; </td>
-    <td>
-    <a href = "./examples/other/tn">tn</a> / <a href = "./examples/other/g2p">g2p</a>
-    </td>
+      <td> Text Frontend </td>
+      <td colspan="2"> &emsp; </td>
+      <td>
+      <a href = "./examples/other/tn">tn</a> / <a href = "./examples/other/g2p">g2p</a>
+      </td>
     </tr>
     <tr>
-      <td rowspan="5">Acoustic Model</td>
+      <td rowspan="6">Acoustic Model</td>
       <td>Tacotron2</td>
       <td>LJSpeech / CSMSC</td>
       <td>
@@ -619,6 +626,13 @@ PaddleSpeech supports a series of most popular models. They are summarized in [r
       <a href = "./examples/vctk/ernie_sat">ERNIE-SAT-vctk</a> / <a href = "./examples/aishell3/ernie_sat">ERNIE-SAT-aishell3</a> / <a href = "./examples/aishell3_vctk/ernie_sat">ERNIE-SAT-zh_en</a>
       </td>
     </tr>
+    <tr>
+      <td>DiffSinger</td>
+      <td>Opencpop</td>
+      <td>
+      <a href = "./examples/opencpop/svs1">DiffSinger-opencpop</a>
+      </td>
+   </tr>
    <tr>
       <td rowspan="6">Vocoder</td>
       <td >WaveFlow</td>
@@ -629,9 +643,9 @@ PaddleSpeech supports a series of most popular models. They are summarized in [r
     </tr>
     <tr>
       <td >Parallel WaveGAN</td>
-      <td >LJSpeech / VCTK / CSMSC / AISHELL-3</td>
+      <td >LJSpeech / VCTK / CSMSC / AISHELL-3 / Opencpop</td>
       <td>
-      <a href = "./examples/ljspeech/voc1">PWGAN-ljspeech</a> / <a href = "./examples/vctk/voc1">PWGAN-vctk</a> / <a href = "./examples/csmsc/voc1">PWGAN-csmsc</a> /  <a href = "./examples/aishell3/voc1">PWGAN-aishell3</a>
+      <a href = "./examples/ljspeech/voc1">PWGAN-ljspeech</a> / <a href = "./examples/vctk/voc1">PWGAN-vctk</a> / <a href = "./examples/csmsc/voc1">PWGAN-csmsc</a> /  <a href = "./examples/aishell3/voc1">PWGAN-aishell3</a> / <a href = "./examples/opencpop/voc1">PWGAN-opencpop</a>
       </td>
     </tr>
     <tr>
@@ -650,9 +664,9 @@ PaddleSpeech supports a series of most popular models. They are summarized in [r
     </tr>
     <tr>
       <td>HiFiGAN</td>
-      <td>LJSpeech / VCTK / CSMSC / AISHELL-3</td>
+      <td>LJSpeech / VCTK / CSMSC / AISHELL-3 / Opencpop</td>
       <td>
-      <a href = "./examples/ljspeech/voc5">HiFiGAN-ljspeech</a> / <a href = "./examples/vctk/voc5">HiFiGAN-vctk</a> / <a href = "./examples/csmsc/voc5">HiFiGAN-csmsc</a> / <a href = "./examples/aishell3/voc5">HiFiGAN-aishell3</a>
+      <a href = "./examples/ljspeech/voc5">HiFiGAN-ljspeech</a> / <a href = "./examples/vctk/voc5">HiFiGAN-vctk</a> / <a href = "./examples/csmsc/voc5">HiFiGAN-csmsc</a> / <a href = "./examples/aishell3/voc5">HiFiGAN-aishell3</a> / <a href = "./examples/opencpop/voc5">HiFiGAN-opencpop</a>
       </td>
     </tr>
     <tr>
@@ -880,15 +894,20 @@ The Text-to-Speech module is originally called [Parakeet](https://github.com/Pad
 
 - **[VTuberTalk](https://github.com/jerryuhoo/VTuberTalk): Use PaddleSpeech TTS and ASR to clone voice from videos.**
 
-<div align="center">
-<img src="https://raw.githubusercontent.com/jerryuhoo/VTuberTalk/main/gui/gui.png"  width = "500px"  />
-</div>
-
 
 ## Citation
 
 To cite PaddleSpeech for research, please use the following format.
+
 ```text
+@inproceedings{zhang2022paddlespeech,
+    title = {PaddleSpeech: An Easy-to-Use All-in-One Speech Toolkit},
+    author = {Hui Zhang, Tian Yuan, Junkun Chen, Xintong Li, Renjie Zheng, Yuxin Huang, Xiaojie Chen, Enlei Gong, Zeyu Chen, Xiaoguang Hu, dianhai yu, Yanjun Ma, Liang Huang},
+    booktitle = {Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies: Demonstrations},
+    year = {2022},
+    publisher = {Association for Computational Linguistics},
+}
+
 @InProceedings{pmlr-v162-bai22d,
   title = {{A}$^3${T}: Alignment-Aware Acoustic and Text Pretraining for Speech Synthesis and Editing},
   author = {Bai, He and Zheng, Renjie and Chen, Junkun and Ma, Mingbo and Li, Xintong and Huang, Liang},
@@ -901,14 +920,6 @@ To cite PaddleSpeech for research, please use the following format.
   publisher = {PMLR},
   pdf = {https://proceedings.mlr.press/v162/bai22d/bai22d.pdf},
   url = {https://proceedings.mlr.press/v162/bai22d.html},
-}
-
-@inproceedings{zhang2022paddlespeech,
-    title = {PaddleSpeech: An Easy-to-Use All-in-One Speech Toolkit},
-    author = {Hui Zhang, Tian Yuan, Junkun Chen, Xintong Li, Renjie Zheng, Yuxin Huang, Xiaojie Chen, Enlei Gong, Zeyu Chen, Xiaoguang Hu, dianhai yu, Yanjun Ma, Liang Huang},
-    booktitle = {Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies: Demonstrations},
-    year = {2022},
-    publisher = {Association for Computational Linguistics},
 }
 
 @inproceedings{zheng2021fused,

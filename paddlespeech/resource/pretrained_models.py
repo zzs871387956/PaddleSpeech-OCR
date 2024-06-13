@@ -117,6 +117,48 @@ ssl_dynamic_pretrained_models = {
             'exp/wav2vec2ASR/checkpoints/avg_1.pdparams',
         },
     },
+    "hubert-en-16k": {
+        '1.4': {
+            'url':
+            'https://paddlespeech.bj.bcebos.com/hubert/hubert-large-lv60_ckpt_1.4.0.model.tar.gz',
+            'md5':
+            'efecfb87a8718aa9253b7459c1fe9b54',
+            'cfg_path':
+            'model.yaml',
+            'ckpt_path':
+            'hubert-large-lv60',
+            'model':
+            'hubert-large-lv60.pdparams',
+            'params':
+            'hubert-large-lv60.pdparams',
+        },
+    },
+    "hubertASR_librispeech-100h-en-16k": {
+        '1.4': {
+            'url':
+            'https://paddlespeech.bj.bcebos.com/hubert/hubertASR-large-100h-librispeech_ckpt_1.4.0.model.tar.gz',
+            'md5':
+            '574cefd11aaef5737969ce22a7f33ea2',
+            'cfg_path':
+            'model.yaml',
+            'ckpt_path':
+            'exp/hubertASR/checkpoints/avg_1',
+            'model':
+            'exp/hubertASR/checkpoints/avg_1.pdparams',
+            'params':
+            'exp/hubertASR/checkpoints/avg_1.pdparams',
+        },
+    },
+    "wavlmASR_librispeech-en-16k": {
+        "1.0": {
+            "url": "https://paddlespeech.bj.bcebos.com/wavlm/wavlm_baseplus_libriclean_100h.tar.gz",
+            "md5": "f2238e982bb8bcf046e536201f5ea629",
+            "cfg_path": "model.yaml",
+            "ckpt_path": "exp/wavlmASR/checkpoints/46",
+            "model": "exp/wavlmASR/checkpoints/46.pdparams",
+            "params": "exp/wavlmASR/checkpoints/46.pdparams",
+        }
+    }
 }
 
 # ---------------------------------
@@ -223,6 +265,16 @@ asr_dynamic_pretrained_models = {
             'https://paddlespeech.bj.bcebos.com/s2t/aishell/asr1/asr1_chunk_conformer_aishell_ckpt_0.2.0.model.tar.gz',
             'md5':
             'b374cfb93537761270b6224fb0bfc26a',
+            'cfg_path':
+            'model.yaml',
+            'ckpt_path':
+            'exp/chunk_conformer/checkpoints/avg_30',
+        },
+        '1.4': {
+            'url':
+            'https://paddlespeech.bj.bcebos.com/s2t/aishell/asr1/asr1_conformer_aishell_ckpt_1.5.0.model.tar.gz',
+            'md5':
+            '38924b8adc28ef458847c3571e87e3cb',
             'cfg_path':
             'model.yaml',
             'ckpt_path':

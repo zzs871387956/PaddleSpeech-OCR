@@ -8,7 +8,7 @@
     <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache%202-red.svg"></a>
     <a href="https://github.com/PaddlePaddle/PaddleSpeech/releases"><img src="https://img.shields.io/github/v/release/PaddlePaddle/PaddleSpeech?color=ffa"></a>
     <a href="support os"><img src="https://img.shields.io/badge/os-linux%2C%20win%2C%20mac-pink.svg"></a>
-    <a href=""><img src="https://img.shields.io/badge/python-3.7+-aff.svg"></a>
+    <a href=""><img src="https://img.shields.io/badge/python-3.8+-aff.svg"></a>
     <a href="https://github.com/PaddlePaddle/PaddleSpeech/graphs/contributors"><img src="https://img.shields.io/github/contributors/PaddlePaddle/PaddleSpeech?color=9ea"></a>
     <a href="https://github.com/PaddlePaddle/PaddleSpeech/commits"><img src="https://img.shields.io/github/commit-activity/m/PaddlePaddle/PaddleSpeech?color=3af"></a>
     <a href="https://github.com/PaddlePaddle/PaddleSpeech/issues"><img src="https://img.shields.io/github/issues/PaddlePaddle/PaddleSpeech?color=9cc"></a>
@@ -183,6 +183,13 @@
   - 🧩 级联模型应用: 作为传统语音任务的扩展，我们结合了自然语言处理、计算机视觉等任务，实现更接近实际需求的产业级应用。
 
 ### 近期更新
+- 👑 2023.05.31: 新增 [WavLM ASR-en](https://github.com/PaddlePaddle/PaddleSpeech/blob/develop/examples/librispeech/asr5), 基于WavLM的英语识别微调，使用LibriSpeech数据集
+- 👑 2023.05.04: 新增 [HuBERT ASR-en](https://github.com/PaddlePaddle/PaddleSpeech/blob/develop/examples/librispeech/asr4), 基于HuBERT的英语识别微调，使用LibriSpeech数据集
+- ⚡ 2023.04.28: 修正 [0-d tensor](https://github.com/PaddlePaddle/PaddleSpeech/pull/3214), 配合PaddlePaddle2.5升级修改了0-d tensor的问题。
+- 👑 2023.04.25: 新增 [U2 conformer 的 AMP 训练](https://github.com/PaddlePaddle/PaddleSpeech/pull/3167).
+- 👑 2023.04.06: 新增 [srt格式字幕生成功能](./demos/streaming_asr_server)。
+- 👑 2023.04.25: 新增 [U2 conformer 的 AMP 训练](https://github.com/PaddlePaddle/PaddleSpeech/pull/3167).
+- 🔥 2023.03.14: 新增基于 Opencpop 数据集的 SVS (歌唱合成) 示例，包含 [DiffSinger](./examples/opencpop/svs1)、[PWGAN](./examples/opencpop/voc1) 和 [HiFiGAN](./examples/opencpop/voc5)，效果持续优化中。
 - 👑 2023.03.09: 新增 [Wav2vec2ASR-zh](./examples/aishell/asr3)。
 - 🎉 2023.03.07: 新增 [TTS ARM Linux C++ 部署示例](./demos/TTSArmLinux)。
 - 🔥 2023.03.03: 新增声音转换模型 [StarGANv2-VC 合成流程](./examples/vctk/vc3)。
@@ -231,12 +238,12 @@
 <a name="安装"></a>
 ## 安装
 
-我们强烈建议用户在 **Linux** 环境下，*3.7* 以上版本的 *python* 上安装 PaddleSpeech。
+我们强烈建议用户在 **Linux** 环境下，*3.8* 以上版本的 *python* 上安装 PaddleSpeech。同时，有一些Paddle新版本的内容没有在做适配的支持，因此目前只能使用2.5.1及之前的版本。
 
 ### 相关依赖
 + gcc >= 4.8.5
-+ paddlepaddle >= 2.4.1
-+ python >= 3.7
++ paddlepaddle <= 2.5.1
++ python >= 3.8
 + linux(推荐), mac, windows
 
 PaddleSpeech 依赖于 paddlepaddle，安装可以参考[ paddlepaddle 官网](https://www.paddlepaddle.org.cn/)，根据自己机器的情况进行选择。这里给出 cpu 版本示例，其它版本大家可以根据自己机器的情况进行安装。
@@ -576,43 +583,50 @@ PaddleSpeech 的 **语音合成** 主要包含三个模块：文本前端、声�
     <td>
     <a href = "./examples/other/tn">tn</a> / <a href = "./examples/other/g2p">g2p</a>
     </td>
-    </tr>
-    <tr>
-      <td rowspan="5">声学模型</td>
+   </tr>
+   <tr>
+      <td rowspan="6">声学模型</td>
       <td>Tacotron2</td>
       <td>LJSpeech / CSMSC</td>
       <td>
       <a href = "./examples/ljspeech/tts0">tacotron2-ljspeech</a> / <a href = "./examples/csmsc/tts0">tacotron2-csmsc</a>
       </td>
-    </tr>
-    <tr>
+   </tr>
+   <tr>
       <td>Transformer TTS</td>
       <td>LJSpeech</td>
       <td>
       <a href = "./examples/ljspeech/tts1">transformer-ljspeech</a>
       </td>
-    </tr>
-    <tr>
+   </tr>
+   <tr>
       <td>SpeedySpeech</td>
       <td>CSMSC</td>
       <td >
       <a href = "./examples/csmsc/tts2">speedyspeech-csmsc</a>
       </td>
-    </tr>
-    <tr>
+   </tr>
+   <tr>
       <td>FastSpeech2</td>
       <td>LJSpeech / VCTK / CSMSC / AISHELL-3 / ZH_EN / finetune</td>
       <td>
       <a href = "./examples/ljspeech/tts3">fastspeech2-ljspeech</a> / <a href = "./examples/vctk/tts3">fastspeech2-vctk</a> / <a href = "./examples/csmsc/tts3">fastspeech2-csmsc</a> / <a href = "./examples/aishell3/tts3">fastspeech2-aishell3</a> / <a href = "./examples/zh_en_tts/tts3">fastspeech2-zh_en</a> / <a href = "./examples/other/tts_finetune/tts3">fastspeech2-finetune</a>
       </td>
-    </tr>
-    <tr>
+   </tr>
+   <tr>
       <td><a href = "https://arxiv.org/abs/2211.03545">ERNIE-SAT</a></td>
       <td>VCTK / AISHELL-3 / ZH_EN</td>
       <td>
       <a href = "./examples/vctk/ernie_sat">ERNIE-SAT-vctk</a> / <a href = "./examples/aishell3/ernie_sat">ERNIE-SAT-aishell3</a> / <a href = "./examples/aishell3_vctk/ernie_sat">ERNIE-SAT-zh_en</a>
       </td>
-    </tr>
+   </tr>
+   <tr>
+      <td>DiffSinger</td>
+      <td>Opencpop</td>
+      <td>
+      <a href = "./examples/opencpop/svs1">DiffSinger-opencpop</a>
+      </td>
+   </tr>
    <tr>
       <td rowspan="6">声码器</td>
       <td >WaveFlow</td>
@@ -623,9 +637,9 @@ PaddleSpeech 的 **语音合成** 主要包含三个模块：文本前端、声�
     </tr>
     <tr>
       <td >Parallel WaveGAN</td>
-      <td >LJSpeech / VCTK / CSMSC / AISHELL-3</td>
+      <td >LJSpeech / VCTK / CSMSC / AISHELL-3 / Opencpop</td>
       <td>
-      <a href = "./examples/ljspeech/voc1">PWGAN-ljspeech</a> / <a href = "./examples/vctk/voc1">PWGAN-vctk</a> / <a href = "./examples/csmsc/voc1">PWGAN-csmsc</a> /  <a href = "./examples/aishell3/voc1">PWGAN-aishell3</a>
+      <a href = "./examples/ljspeech/voc1">PWGAN-ljspeech</a> / <a href = "./examples/vctk/voc1">PWGAN-vctk</a> / <a href = "./examples/csmsc/voc1">PWGAN-csmsc</a> /  <a href = "./examples/aishell3/voc1">PWGAN-aishell3</a> / <a href = "./examples/opencpop/voc1">PWGAN-opencpop</a>
       </td>
     </tr>
     <tr>
@@ -644,9 +658,9 @@ PaddleSpeech 的 **语音合成** 主要包含三个模块：文本前端、声�
     </tr>
     <tr>
       <td >HiFiGAN</td>
-      <td >LJSpeech / VCTK / CSMSC / AISHELL-3</td>
+      <td >LJSpeech / VCTK / CSMSC / AISHELL-3 / Opencpop</td>
       <td>
-      <a href = "./examples/ljspeech/voc5">HiFiGAN-ljspeech</a> / <a href = "./examples/vctk/voc5">HiFiGAN-vctk</a> / <a href = "./examples/csmsc/voc5">HiFiGAN-csmsc</a> / <a href = "./examples/aishell3/voc5">HiFiGAN-aishell3</a>
+      <a href = "./examples/ljspeech/voc5">HiFiGAN-ljspeech</a> / <a href = "./examples/vctk/voc5">HiFiGAN-vctk</a> / <a href = "./examples/csmsc/voc5">HiFiGAN-csmsc</a> / <a href = "./examples/aishell3/voc5">HiFiGAN-aishell3</a> / <a href = "./examples/opencpop/voc5">HiFiGAN-opencpop</a>
       </td>
     </tr>
     <tr>
@@ -702,6 +716,7 @@ PaddleSpeech 的 **语音合成** 主要包含三个模块：文本前端、声�
     </tr>
   </tbody>
 </table>
+
 
 <a name="声音分类模型"></a>
 **声音分类**

@@ -22,6 +22,7 @@ from .layers import ConvBlock
 from .layers import ConvNorm
 from .layers import LinearNorm
 from .layers import MFCC
+from paddlespeech.t2s.modules.nets_utils import _reset_parameters
 from paddlespeech.utils.initialize import uniform_
 
 
@@ -58,6 +59,9 @@ class ASRCNN(nn.Layer):
             embedding_dim=token_embedding_dim,
             hidden_dim=hidden_dim // 2,
             n_token=n_token)
+
+        self.reset_parameters()
+        self.asr_s2s.reset_parameters()
 
     def forward(self,
                 x: paddle.Tensor,
@@ -99,7 +103,7 @@ class ASRCNN(nn.Layer):
             unmask_futre_steps (int): 
                 unmasking future step size.
         Return:
-            mask (paddle.BoolTensor): 
+            Tensor (paddle.Tensor(bool)): 
                 mask future timesteps mask[i, j] = True if i > j + unmask_future_steps else False
         """
         index_tensor = paddle.arange(out_length).unsqueeze(0).expand(
@@ -107,6 +111,9 @@ class ASRCNN(nn.Layer):
         mask = paddle.greater_than(index_tensor,
                                    index_tensor.T + unmask_future_steps)
         return mask
+
+    def reset_parameters(self):
+        self.apply(_reset_parameters)
 
 
 class ASRS2S(nn.Layer):
@@ -118,8 +125,7 @@ class ASRS2S(nn.Layer):
                  n_token: int=40):
         super().__init__()
         self.embedding = nn.Embedding(n_token, embedding_dim)
-        val_range = math.sqrt(6 / hidden_dim)
-        uniform_(self.embedding.weight, -val_range, val_range)
+        self.val_range = math.sqrt(6 / hidden_dim)
 
         self.decoder_rnn_dim = hidden_dim
         self.project_to_n_symbols = nn.Linear(self.decoder_rnn_dim, n_token)
@@ -194,9 +200,8 @@ class ASRS2S(nn.Layer):
             logit_outputs += [logit]
             alignments += [attention_weights]
 
-        hidden_outputs, logit_outputs, alignments = \
-            self.parse_decoder_outputs(
-                hidden_outputs, logit_outputs, alignments)
+        hidden_outputs, logit_outputs, alignments = self.parse_decoder_outputs(
+            hidden_outputs, logit_outputs, alignments)
 
         return hidden_outputs, logit_outputs, alignments
 
@@ -237,3 +242,6 @@ class ASRS2S(nn.Layer):
         hidden = paddle.stack(hidden).transpose([1, 0, 2])
 
         return hidden, logit, alignments
+
+    def reset_parameters(self):
+        uniform_(self.embedding.weight, -self.val_range, self.val_range)

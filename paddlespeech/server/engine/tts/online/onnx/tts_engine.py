@@ -28,7 +28,7 @@ from paddlespeech.server.utils.audio_process import float2pcm
 from paddlespeech.server.utils.onnx_infer import get_sess
 from paddlespeech.server.utils.util import denorm
 from paddlespeech.server.utils.util import get_chunks
-from paddlespeech.t2s.frontend import English
+from paddlespeech.t2s.frontend.en_frontend import English
 from paddlespeech.t2s.frontend.zh_frontend import Frontend
 
 __all__ = ['TTSEngine', 'PaddleTTSConnectionHandler']
@@ -154,7 +154,7 @@ class TTSServerExecutor(TTSExecutor):
         self.voc_sess = get_sess(self.voc_ckpt, voc_sess_conf)
         logger.debug("Create voc sess successfully.")
 
-        with open(self.phones_dict, "r") as f:
+        with open(self.phones_dict, "r", encoding='utf-8') as f:
             phn_id = [line.strip().split() for line in f.readlines()]
         self.vocab_size = len(phn_id)
         logger.debug(f"vocab_size: {self.vocab_size}")
