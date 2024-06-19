@@ -299,12 +299,18 @@ def parse_args():
         default=None,
         help="dir to save inference models")
     parser.add_argument(
-        "--ngpu", type=int, default=1, help="if ngpu == 0, use cpu or xpu.")
+        "--ngpu", type=int, default=1, help="if ngpu == 0, use cpu or xpu or npu.")
     parser.add_argument(
         "--nxpu",
         type=int,
         default=0,
-        help="if wish to use xpu, set ngpu == 0 and nxpu > 0, and if ngpu == 0 and nxpu == 0, use cpu."
+        help="if wish to use xpu, set ngpu == 0 and nxpu > 0, and if ngpu == 0 and nxpu == 0 and nnpu == 0, use cpu."
+    )
+    parser.add_argument(
+        "--nnpu",
+        type=int,
+        default=0,
+        help="if wish to use npu, set ngpu == 0 and nnpu > 0, and if ngpu == 0 and nxpu == 0 and nnpu == 0, use cpu."
     )
     parser.add_argument(
         "--text",
@@ -339,10 +345,12 @@ def main():
         paddle.set_device("gpu")
     elif args.nxpu > 0:
         paddle.set_device("xpu")
-    elif args.ngpu == 0 and args.nxpu == 0:
+    elif args.nnpu > 0:
+        paddle.set_device("npu")
+    elif args.ngpu == 0 and args.nxpu == 0 or args.nnpu == 0:
         paddle.set_device("cpu")
     else:
-        print("ngpu or nxpu should >= 0 !")
+        print("ngpu or nxpu or nnpu should >= 0 !")
 
     evaluate(args)
 
