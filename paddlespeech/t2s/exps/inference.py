@@ -112,7 +112,7 @@ def parse_args():
     parser.add_argument(
         "--device",
         default="gpu",
-        choices=["gpu", "cpu", "xpu"],
+        choices=["gpu", "cpu", "xpu", "npu"],
         help="Device selected for inference.", )
     parser.add_argument('--cpu_threads', type=int, default=1)
 
