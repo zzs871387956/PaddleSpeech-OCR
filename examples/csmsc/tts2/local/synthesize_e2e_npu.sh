@@ -24,9 +24,10 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
         --output_dir=${train_output_path}/test_e2e \
         --phones_dict=dump/phone_id_map.txt \
         --tones_dict=dump/tone_id_map.txt \
+        --inference_dir=${train_output_path}/inference \
         --ngpu=0 \
         --nnpu=1
-        # --inference_dir=${train_output_path}/inference \
+
 
 fi
 
