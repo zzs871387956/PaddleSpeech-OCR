@@ -219,18 +219,21 @@ def parse_args():
     )
     # other
     parser.add_argument(
-        "--ngpu", type=int, default=1, help="if ngpu == 0, use cpu or xpu or npu.")
+        "--ngpu",
+        type=int,
+        default=1,
+        help="if wish to use gpu, set ngpu > 0, otherwise use xpu, npu or cpu.")
     parser.add_argument(
         "--nxpu",
         type=int,
         default=0,
-        help="if wish to use xpu, set ngpu == 0 and nxpu > 0, and if ngpu == 0 and nxpu == 0 and nnpu == 0, use cpu."
+        help="if wish to use xpu, set ngpu == 0 and nxpu > 0, otherwise use gpu, npu or cpu."
     )
     parser.add_argument(
         "--nnpu",
         type=int,
         default=0,
-        help="if wish to use npu, set ngpu == 0 and nxpu == 0 and nnpu > 0, and if ngpu == 0 and nxpu == 0 and nnpu == 0, use cpu."
+        help="if wish to use npu, set ngpu == 0 and nnpu > 0, otherwise use gpu, xpu or cpu."
     )
     parser.add_argument("--test_metadata", type=str, help="test metadata.")
     parser.add_argument("--output_dir", type=str, help="output dir.")
