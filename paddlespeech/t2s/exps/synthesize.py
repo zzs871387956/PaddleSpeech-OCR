@@ -259,7 +259,7 @@ def main():
     elif args.ngpu == 0 and args.nxpu == 0 and args.nnpu == 0:
         paddle.set_device("cpu")
     else:
-        print("ngpu or nxpu or nnpu should >= 0 !")
+        print("ngpu, nxpu and nnpu should be >= 0")
 
     evaluate(args)
 
