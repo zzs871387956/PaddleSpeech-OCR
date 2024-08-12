@@ -219,7 +219,10 @@ def parse_args():
     )
     # other
     parser.add_argument(
-        "--ngpu", type=int, default=1, help="if wish to use gpu, set ngpu > 0, otherwise use xpu, npu or cpu.")
+        "--ngpu",
+        type=int,
+        default=1,
+        help="if wish to use gpu, set ngpu > 0, otherwise use xpu, npu or cpu.")
     parser.add_argument(
         "--nxpu",
         type=int,
