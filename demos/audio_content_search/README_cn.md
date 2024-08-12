@@ -38,7 +38,7 @@ wget -c https://paddlespeech.bj.bcebos.com/PaddleAudio/zh.wav
   
   使用方法：
   ```bash
-  paddlespeech acs --help
+  paddlespeech asr --help
   ```
   参数：
   - `input`(必须输入)：用于识别的音频文件。
