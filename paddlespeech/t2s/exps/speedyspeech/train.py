@@ -58,7 +58,6 @@ def train_sp(args, config):
     else:
         paddle.set_device("cpu")
 
-
     # set the random seed, it is a must for multiprocess training
     seed_everything(config.seed)
 
@@ -202,7 +201,10 @@ def main():
         default=0,
         help="if nnpu == 0 and nxpu == 0 and ngpu == 0, use cpu.")
     parser.add_argument(
-        "--ngpu", type=int, default=1, help="if ngpu == 0, use cpu or xpu or npu")
+        "--ngpu",
+        type=int,
+        default=1,
+        help="if ngpu == 0, use cpu or xpu or npu")
 
     parser.add_argument(
         "--use-relative-path",
