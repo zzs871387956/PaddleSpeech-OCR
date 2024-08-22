@@ -302,18 +302,25 @@ def parse_args():
         "--ngpu",
         type=int,
         default=1,
-        help="if wish to use gpu, set ngpu > 0, otherwise use xpu, npu or cpu.")
+        help="if wish to use gpu, set ngpu > 0, otherwise use xpu, npu, mlu or cpu."
+    )
     parser.add_argument(
         "--nxpu",
         type=int,
         default=0,
-        help="if wish to use xpu, set ngpu == 0 and nxpu > 0, otherwise use gpu, npu or cpu."
+        help="if wish to use xpu, set ngpu == 0 and nxpu > 0, otherwise use gpu, npu, mlu or cpu."
     )
     parser.add_argument(
         "--nnpu",
         type=int,
         default=0,
-        help="if wish to use npu, set ngpu == 0 and nnpu > 0, otherwise use gpu, xpu or cpu."
+        help="if wish to use npu, set ngpu == 0 and nnpu > 0, otherwise use gpu, xpu, mlu or cpu."
+    )
+    parser.add_argument(
+        "--nmlu",
+        type=int,
+        default=0,
+        help="if wish to use xpu, set ngpu == 0 and nmlu > 0, otherwise use gpu, xpu, npu or cpu."
     )
     parser.add_argument(
         "--text",
@@ -350,10 +357,14 @@ def main():
         paddle.set_device("xpu")
     elif args.nnpu > 0:
         paddle.set_device("npu")
-    elif args.ngpu == 0 and args.nxpu == 0 or args.nnpu == 0:
+    elif args.nmlu > 0:
+        paddle.set_device("mlu")
+    elif args.ngpu == 0 and args.nxpu == 0 and args.nnpu == 0 and args.nmlu == 0:
         paddle.set_device("cpu")
     else:
-        print("ngpu, nxpu and nnpu should be >= 0")
+        print(
+            "one of ngpu, nxpu, nnpu or nmlu should be greater than 0, others equal to 0"
+        )
 
     evaluate(args)
 

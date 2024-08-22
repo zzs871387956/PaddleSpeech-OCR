@@ -55,6 +55,8 @@ def train_sp(args, config):
         paddle.device.set_device("npu")
         if world_size > 1:
             paddle.distributed.init_parallel_env()
+    elif args.nmlu > 0:
+        paddle.device.set_device("mlu")
     else:
         paddle.set_device("cpu")
 
@@ -194,13 +196,19 @@ def main():
         "--nxpu",
         type=int,
         default=0,
-        help="if wish to use xpu, set ngpu == 0 and nxpu > 0, otherwise use gpu, npu or cpu."
+        help="if wish to use xpu, set ngpu == 0 and nxpu > 0, otherwise use gpu, npu, mlu or cpu."
     )
     parser.add_argument(
         "--nnpu",
         type=int,
         default=0,
-        help="if wish to use npu, set ngpu == 0 and nnpu > 0, otherwise use gpu, xpu or cpu."
+        help="if wish to use npu, set ngpu == 0 and nnpu > 0, otherwise use gpu, xpu, mlu or cpu."
+    )
+    parser.add_argument(
+        "--nmlu",
+        type=int,
+        default=1,
+        help="if wish to use npu, set ngpu == 0 and nmlu > 0, otherwise use gpu, xpu, npu or cpu."
     )
     parser.add_argument(
         "--ngpu",
